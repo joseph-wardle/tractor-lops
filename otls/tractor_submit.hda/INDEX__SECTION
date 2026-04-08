@@ -41,6 +41,21 @@ Python:       false
 Empty:        false
 Modified:     Fri May  2 13:36:47 2025
 
+Operator:     tlops::tractor_encode_video::1.0
+Label:        Tractor Encode Video
+Path:         oplib:/tlops::Lop/tractor_encode_video::1.0?tlops::Lop/tractor_encode_video::1.0
+Icon:         TOP_tractorscheduler
+Table:        Lop
+License:
+Extra:
+User:
+Inputs:       1 to 1
+Outputs:      0
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Mon Apr  7 18:00:00 2026
+
 Operator:     tlops::shared_python
 Label:        TLOPs Shared Python
 Path:         oplib:/tlops::Lop/shared_python?tlops::Lop/shared_python
