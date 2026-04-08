@@ -50,7 +50,6 @@ License:
 Extra:
 User:
 Inputs:       1 to 1
-Outputs:      0
 Subnet:       true
 Python:       false
 Empty:        false
