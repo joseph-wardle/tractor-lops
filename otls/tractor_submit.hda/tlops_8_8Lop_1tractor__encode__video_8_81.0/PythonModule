@@ -122,6 +122,8 @@ def generate_tractor_task(node: hou.LopNode, submit_input: hou.LopNode) -> autho
 def _collect_frame_numbers(task: author.Task, pattern: re.Pattern) -> list[int]:
     """Recursively search task tree for frame numbers in task titles."""
     results = []
+    if not task.subtasks:
+        return results
     for subtask in task.subtasks:
         m = pattern.match(subtask.title)
         if m:
