@@ -79,12 +79,12 @@ def generate_tractor_task(node: hou.LopNode, submit_input: hou.LopNode) -> autho
 
     frame_start = min(frame_numbers)
 
-    # Step 1: Color convert EXR frames to PNG via oiiotool
+    # Step 1: Color convert EXR frames to PNG via hoiiotool
     convert_cmd = (
         f"mkdir -p '{tmp_dir}' && "
         f"for f in '{image_dir}'/*.exr; do "
         f"  fbase=$(basename \"$f\" .exr); "
-        f"  oiiotool \"$f\" "
+        f"  hoiiotool \"$f\" "
         f"    --colorconvert '{parms.colorspace_in}' '{parms.colorspace_out}' "
         f"    -o '{tmp_dir}/'\"$fbase\".png; "
         f"done"
