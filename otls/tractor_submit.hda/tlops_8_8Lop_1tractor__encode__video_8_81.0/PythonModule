@@ -28,6 +28,8 @@ IMAGES_DIR = "images"
 DENOISE_DIR = "images_dn"
 ENCODE_DIR = "video_tmp"
 
+_OCIO_CONFIG = "/groups/sandwich/.pipeline/pipeline/lib/ocio/sandwich-v01/config.ocio"
+
 
 def _input_image_dir(node: hou.LopNode) -> str:
     """Determine the correct image subdirectory based on the input node type."""
@@ -81,6 +83,7 @@ def generate_tractor_task(node: hou.LopNode, submit_input: hou.LopNode) -> autho
 
     # Step 1: Color convert EXR frames to PNG via hoiiotool
     convert_cmd = (
+        f"export OCIO='{_OCIO_CONFIG}'; "
         f"mkdir -p '{tmp_dir}' && "
         f"for f in '{image_dir}'/*.exr; do "
         f"  fbase=$(basename \"$f\" .exr); "

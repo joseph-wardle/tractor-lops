@@ -39,7 +39,6 @@
         menureplace {
             "scene_linear"  "Scene Linear (OCIO Role)"
             "ACEScg"        "ACEScg"
-            "linear"        "Linear"
         }
         parmtag { "script_callback_language" "python" }
     }
@@ -47,11 +46,10 @@
         name    "colorspace_out"
         label   "Display Color Space"
         type    string
-        default { "sRGB" }
+        default { "sRGB - Texture" }
         menureplace {
-            "sRGB"              "sRGB"
-            "Output - sRGB"     "Output - sRGB (ACES)"
-            "Rec.709"           "Rec.709"
+            "sRGB - Texture"                "sRGB - Texture"
+            "Gamma 2.4 Rec.709 - Texture"   "Rec.709 Gamma 2.4"
         }
         parmtag { "script_callback_language" "python" }
     }
