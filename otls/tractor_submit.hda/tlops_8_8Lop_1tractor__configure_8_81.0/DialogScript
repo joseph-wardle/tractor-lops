@@ -121,7 +121,7 @@
         name    "trange"
         label   "Valid Frame Range"
         type    ordinal
-        default { "off" }
+        default { "on" }
         menu {
             "off"       "Render Current Frame"
             "normal"    "Render Specific Frame Range"
@@ -168,11 +168,19 @@
         name    "savetodirectory_directory"
         label   "Render Directory"
         type    directory
-        default { "$HOUDINI_TEMP_DIR/usd_renders/$RENDERID" }
+        default { "" }
         menureplace {
             [ "opmenu -l -a usdrender_rop savetodirectory_directory" ]
         }
         parmtag { "autoscope" "0000000000000000" }
+        parmtag { "script_callback_language" "python" }
+    }
+    parm {
+        name    "refresh_dirc"
+        label   "Refresh Directory"
+        type    button
+        default { "0" }
+        parmtag { "script_callback" "hou.phm().refresh_render_dir(kwargs[\"node\"])" }
         parmtag { "script_callback_language" "python" }
     }
     parm {
@@ -213,14 +221,14 @@
             type    toggle
             nolabel
             joinnext
-            default { "0" }
+            default { "1" }
             parmtag { "script_callback_language" "python" }
         }
         parm {
             name    "override_camera"
             label   "Override Camera"
             type    string
-            default { "" }
+            default { "/cameras/shotCam" }
             disablewhen "{ toggle_override_camera == 0 }"
             parmtag { "autoscope" "0000000000000000" }
             parmtag { "script_action" "import loputils\nloputils.selectPrimsInParm(kwargs, False)" }
@@ -232,7 +240,7 @@
             name    "override_res"
             label   "Override Resolution"
             type    string
-            default { "" }
+            default { "specific" }
             menu {
                 ""          "None (USD Settings)"
                 "scale"     "Percentage of Resolution"
@@ -277,7 +285,7 @@
             type    integer
             joinnext
             size    2
-            default { "1280" "720" }
+            default { "1920" "1080" }
             hidewhen "{ override_res != specific }"
             range   { 0 10 }
             parmtag { "autoscope" "0000000000000000" }
@@ -299,7 +307,7 @@
             name    "overscan"
             label   "Overscan %"
             type    float
-            default { "0" }
+            default { "6" }
             range   { 0 50 }
             parmtag { "script_callback_language" "python" }
         }
