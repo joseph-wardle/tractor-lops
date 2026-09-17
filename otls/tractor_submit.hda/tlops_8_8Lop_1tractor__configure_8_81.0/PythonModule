@@ -178,3 +178,28 @@ def generate_tractor_task(node: hou.LopNode, submit_input: hou.LopNode) -> autho
 def job_directory(node: hou.LopNode) -> Path:
     parms = ConfigParms(node)
     return Path(parms.savetodirectory_directory)
+
+import os
+import re
+    
+def _render_base(node: hou.Node) -> Path:
+  hip = Path(hou.text.expandString("$HIP"))
+  if hip.name.lower() == "lighting":
+      return hip.parent / "render" / node.name()
+  return hip / "render"
+
+
+def _next_version_dir(node: hou.Node) -> Path:
+  base = Path(os.path.normpath(_render_base(node)))
+  pattern = re.compile(r"^v(\d+)$")
+  versions = [
+      int(m.group(1))
+      for p in (base.iterdir() if base.is_dir() else [])
+      if p.is_dir() and (m := pattern.match(p.name))
+  ]
+  return base / f"v{max(versions, default=0) + 1:03d}"
+
+
+def refresh_render_dir(node: hou.Node) -> None:
+  node.parm("savetodirectory_directory").set(str(_next_version_dir(node)))
+

@@ -7,4 +7,5 @@ Tools.shelf	Tools.shelf
 Help	Help
 Contents.gz	Contents.gz
 PythonModule	PythonModule
+OnCreated	OnCreated
 ExtraFileOptions	ExtraFileOptions
